@@ -44,12 +44,12 @@ docker run --name redis-test-instance -p 6379:6379 -d redis
 ### Shorten URL
 **POST** `/shorten`
 
-Request:
+Request (path parameter):
 ```text
 ?url={originalUrl}
 ```
 
-Response (path parameter):
+Response:
 ```text
 abc123
 ```
