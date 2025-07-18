@@ -45,11 +45,11 @@ docker run --name redis-test-instance -p 6379:6379 -d redis
 **POST** `/shorten`
 
 Request:
-```json
+```text
 ?url={originalUrl}
 ```
 
-Response:
+Response (path parameter):
 ```text
 abc123
 ```
