@@ -1,4 +1,4 @@
-package redconf
+package conf
 
 import "github.com/go-redis/redis/v8"
 
