@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-func GetShortenCode(url string) string {
-	fmt.Println("initiating GetShortenCode")
+func GetShortenCode(url string) (string, error) {
+	fmt.Println("-- initiating GetShortenCode --")
 
 	timestamp := time.Now().UnixNano()
 	timestampFstring := fmt.Sprintf("%d", timestamp)
@@ -17,5 +17,6 @@ func GetShortenCode(url string) string {
 	key = key[:len(key)-2]
 
 	shortenCode := key[16:]
-	return shortenCode
+	fmt.Println("-- GetShortenCode complete --")
+	return shortenCode, nil
 }

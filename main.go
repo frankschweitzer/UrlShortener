@@ -4,10 +4,16 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/frankschweitzer/UrlShortener/conf"
+	"github.com/frankschweitzer/UrlShortener/utils"
 )
 
 func main() {
-	// redisClient := conf.RedisClient()
+	// initialize redis client
+	redisClient := conf.NewRedisClient()
+
+	// initialize listener and functions
 	http.HandleFunc("/shorten", handleShorten)
 	http.HandleFunc("/", serveHome)
 
@@ -16,22 +22,24 @@ func main() {
 }
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
-	response := "URL SHORTENER"
-	byteResponse := []byte(response)
-	w.Write(byteResponse)
+	w.Write([]byte("URL SHORTENER"))
 }
 
 func handleShorten(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("initiating handleShorten")
+	fmt.Println("-- initiating handleShorten --")
 
+	// obtain url from form input
 	url := r.FormValue("url")
-	fmt.Printf("url received: %s", url)
 
-	// shortenedUrl :=
+	// generate shortened url
+	shortenedUrl, err := utils.GetShortenCode(url)
+	if err != nil {
+		fmt.Printf("failed to obtain url from form input: %s", err)
+		return
+	}
 
-	response := "<insert shortened url here>"
-	byteResponse := []byte(response)
+	// store shortened url in redis
 
-	w.Write(byteResponse)
-	fmt.Println("handleShorten complete")
+	w.Write([]byte("shortened url"))
+	fmt.Println("-- handleShorten complete --")
 }
