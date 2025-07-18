@@ -1,4 +1,4 @@
-module redisPlayground
+module github.com/frankschweitzer/UrlShortener
 
 go 1.23.4
 
